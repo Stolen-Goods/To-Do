@@ -1,0 +1,94 @@
+:root {
+  --text: #840032;
+  --border: #002642;
+  background-color: #e5dada;
+}
+
+* {
+  overflow: hidden;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+#modal {
+  margin: auto;
+  background-color: #e59500;
+  color: var(--text);
+  font-size: 2rem;
+  padding: 4rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-container {
+  display: block;
+  font-size: 1rem;
+  margin: auto;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+}
+
+h1 {
+  color: var(--text);
+
+  font-size: 5rem;
+  text-align: center;
+}
+
+h3 {
+  color: var(--text);
+  font-size: 3rem;
+  text-decoration: underline;
+}
+
+#searchbar {
+  border: 3px solid var(--border);
+  border-radius: 10px;
+  width: 25%;
+  margin: 2rem 1rem;
+}
+
+#sidebar {
+  border: 5px solid var(--border);
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 1rem;
+  gap: 10rem;
+}
+
+#sidebar p {
+  font-size: 2rem;
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  width: 80%;
+  margin: 1rem 2rem;
+}
+
+#new-btn {
+  color: var(--text);
+  font-size: 2rem;
+  border-radius: 10px;
+  background-color: #e59500;
+  width: 80%;
+  margin: 0 1rem;
+  padding: 1rem;
+}
+
+.projects-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks-container,
+.other-container {
+  padding: 1rem;
+}
