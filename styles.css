@@ -82,10 +82,24 @@ h3 {
   padding: 1rem;
 }
 
+.task-box {
+  color: rgb(34, 29, 29);
+  width: 15%;
+  border: 3px solid var(--border);
+  font-size: 2rem;
+  background-color: #e59500;
+}
+
 .projects-container {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .tasks-container,
