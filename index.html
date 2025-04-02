@@ -15,13 +15,13 @@
         <textarea required name="description" id="description"></textarea>
         <label for="due-date">Due Date:</label>
         <input required type="date" id="due-date" name="due-date" />
-        <p>Is this a priority?</p>
-        <div class="radio-container">
+        <fieldset class="radio-container">
+          <legend>Is this a priority?</legend>
           <input type="radio" id="yes" name="priority" value="yes" />
           <label for="yes">Yes</label>
           <input type="radio" id="no" name="priority" value="no" />
           <label for="no">No</label>
-        </div>
+        </fieldset>
         <button id="save-btn" type="submit">Save</button>
         <button id="close-modal" type="button">Cancel</button>
       </form>

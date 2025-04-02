@@ -106,3 +106,7 @@ h3 {
 .other-container {
   padding: 1rem;
 }
+
+.task-completed {
+  display: none;
+}
