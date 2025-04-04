@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do List</title>
     <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="main.js"></script>
   </head>
   <body>
     <dialog id="modal">
@@ -22,13 +23,13 @@
           <input type="radio" id="no" name="priority" value="no" />
           <label for="no">No</label>
         </fieldset>
-        <button id="save-btn" type="submit">Save</button>
+        <button id="save-btn" type="button">Save</button>
         <button id="close-modal" type="button">Cancel</button>
       </form>
     </dialog>
     <div id="sidebar">
       <div class="tasks-container">
-        <h3>Tasks</h3>
+        <h3 class="task-header">Tasks</h3>
         <p class="today">Today</p>
         <p class="tomorrow">Tomorrow</p>
         <p class="upcoming">Upcoming</p>
@@ -46,6 +47,5 @@
       <hr />
       <div class="projects"></div>
     </div>
-    <script src="script.js"></script>
   </body>
 </html>
