@@ -108,5 +108,5 @@ h3 {
 }
 
 .task-completed {
-  display: none;
+  display: none !important;
 }

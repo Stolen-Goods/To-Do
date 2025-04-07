@@ -2,7 +2,7 @@
 
 import save from "./save.js";
 import btnClicks, { completedTasks } from "./buttons.js";
-import { projectDisplay, createdTasks } from "./save.js";
+import { projectDisplay, createdTasks, form, resetView } from "./save.js";
 
 const addNewBtn = document.getElementById("new-btn");
 const importantBtn = document.querySelector(".important");
@@ -14,26 +14,31 @@ const taskHeader = document.querySelector(".task-header");
 
 const completedBtn = document.querySelector(".completed");
 
-addNewBtn.addEventListener("click", () => modal.showModal());
-closeModalBtn.addEventListener("click", () => modal.close());
+addNewBtn.addEventListener("click", () => {
+  modal.showModal();
+  resetView();
+});
+closeModalBtn.addEventListener("click", () => {
+  modal.close();
+  form.reset();
+});
 projectDisplay.addEventListener("click", btnClicks);
 saveBtn.addEventListener("click", save);
 completedBtn.addEventListener("click", () => {
-  completedTasks.forEach((task) => (task.style.display = "block"));
+  completedTasks.forEach((task) => task.classList.remove("task-completed"));
   createdTasks.forEach((task) => (task.style.display = "none"));
 });
 importantBtn.addEventListener("click", () => {
   createdTasks.forEach((task) => {
     if (!task.classList.contains("priority-task")) {
       task.style.display = "none";
+    } else {
+      task.style.display = "block";
     }
   });
+  completedTasks.forEach((task) => task.classList.add("task-completed"));
 });
 
-projectTitle.addEventListener("click", () => {
-  createdTasks.forEach((task) => (task.style.display = "block"));
-});
+projectTitle.addEventListener("click", resetView);
 
-taskHeader.addEventListener("click", () => {
-  createdTasks.forEach((task) => (task.style.display = "block"));
-});
+taskHeader.addEventListener("click", resetView);

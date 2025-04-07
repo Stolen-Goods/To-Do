@@ -1,7 +1,15 @@
 import Project from "./projects.js";
+import { completedTasks } from "./buttons.js";
 
 export const projectDisplay = document.querySelector(".projects");
+export const form = document.querySelector("form");
+
 export let createdTasks = [];
+
+export function resetView() {
+  createdTasks.forEach((task) => (task.style.display = "block"));
+  completedTasks.forEach((task) => task.classList.add("task-completed"));
+}
 
 export default function save(e) {
   e.preventDefault();
@@ -9,7 +17,6 @@ export default function save(e) {
   const taskTitle = document.getElementById("title");
   const description = document.getElementById("description");
   const dueDate = document.getElementById("due-date");
-  const form = document.querySelector("form");
 
   const { title, descrip, date, priority } = new Project(
     taskTitle.value,
