@@ -106,7 +106,14 @@ h3 {
 .other-container {
   padding: 1rem;
 }
+.created-task {
+  display: none !important;
+}
 
 .task-completed {
+  display: none !important;
+}
+
+.not-priority {
   display: none !important;
 }

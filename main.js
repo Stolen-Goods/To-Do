@@ -26,17 +26,17 @@ projectDisplay.addEventListener("click", btnClicks);
 saveBtn.addEventListener("click", save);
 completedBtn.addEventListener("click", () => {
   completedTasks.forEach((task) => task.classList.remove("task-completed"));
-  createdTasks.forEach((task) => (task.style.display = "none"));
+  createdTasks.forEach((task) => task.classList.add("created-task"));
 });
 importantBtn.addEventListener("click", () => {
+  completedTasks.forEach((task) => task.classList.add("task-completed"));
   createdTasks.forEach((task) => {
     if (!task.classList.contains("priority-task")) {
-      task.style.display = "none";
+      task.classList.add("not-priority");
     } else {
-      task.style.display = "block";
+      task.classList.remove("created-task");
     }
   });
-  completedTasks.forEach((task) => task.classList.add("task-completed"));
 });
 
 projectTitle.addEventListener("click", resetView);

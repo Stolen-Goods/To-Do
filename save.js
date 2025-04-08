@@ -7,7 +7,8 @@ export const form = document.querySelector("form");
 export let createdTasks = [];
 
 export function resetView() {
-  createdTasks.forEach((task) => (task.style.display = "block"));
+  createdTasks.forEach((task) => task.classList.remove("created-task"));
+  createdTasks.forEach((task) => task.classList.remove("not-priority"));
   completedTasks.forEach((task) => task.classList.add("task-completed"));
 }
 

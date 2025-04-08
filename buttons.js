@@ -9,9 +9,9 @@ export default function btnClicks(e) {
   }
   if (e.target.classList.contains("complete")) {
     const completedTask = e.target.closest(".task-box");
+    createdTasks.splice(createdTasks.indexOf(completedTask), 1);
     completedTask.classList.add("task-completed");
     completedTasks.push(completedTask);
-    createdTasks.splice(createdTasks.indexOf(completedTask));
     completedTask.children[5].remove();
     completedTask.children[5].remove();
   }
