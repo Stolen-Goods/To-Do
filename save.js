@@ -5,6 +5,7 @@ export const projectDisplay = document.querySelector(".projects");
 export const form = document.querySelector("form");
 
 export let createdTasks = [];
+export let dateList = [];
 
 export function resetView() {
   createdTasks.forEach((task) => task.classList.remove("created-task"));
@@ -22,7 +23,7 @@ export default function save(e) {
   const { title, descrip, date, priority } = new Project(
     taskTitle.value,
     description.value,
-    dueDate.value,
+    new Date(dueDate.value),
     isPriority.value
   );
   const newDiv = document.createElement("div");
@@ -32,7 +33,7 @@ export default function save(e) {
     <p>${title}</p>
     <hr>
     <p>${descrip}</p>
-    <p>${date}</p>
+    <p>${date.getMonth() + 1}/${date.getDate() + 1}/${date.getFullYear()}</p>
     <p>${priority}</p>
     <button class="edit" type="button">Edit</button>
     <button class="complete" type="button">Complete</button>
@@ -42,7 +43,9 @@ export default function save(e) {
     newDiv.classList.add("priority-task");
   }
   createdTasks.push(newDiv);
-
+  dateList.push(
+    `${date.getMonth()}/${date.getDate() + 1}/${date.getFullYear()}`
+  );
   modal.close();
   form.reset();
 }

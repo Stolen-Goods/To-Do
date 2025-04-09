@@ -1,15 +1,17 @@
-import { projectDisplay, createdTasks } from "./save.js";
+import { projectDisplay, createdTasks, dateList } from "./save.js";
 
 export let completedTasks = [];
 
 export default function btnClicks(e) {
   if (e.target.classList.contains("delete")) {
     const deletedTask = e.target.closest(".task-box");
+    dateList.splice(createdTasks.indexOf(createdTasks), 1);
     projectDisplay.removeChild(deletedTask);
   }
   if (e.target.classList.contains("complete")) {
     const completedTask = e.target.closest(".task-box");
     createdTasks.splice(createdTasks.indexOf(completedTask), 1);
+    dateList.splice(createdTasks.indexOf(completedTask), 1);
     completedTask.classList.add("task-completed");
     completedTasks.push(completedTask);
     completedTask.children[5].remove();

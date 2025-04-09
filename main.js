@@ -2,7 +2,13 @@
 
 import save from "./save.js";
 import btnClicks, { completedTasks } from "./buttons.js";
-import { projectDisplay, createdTasks, form, resetView } from "./save.js";
+import {
+  projectDisplay,
+  createdTasks,
+  form,
+  resetView,
+  dateList,
+} from "./save.js";
 
 const addNewBtn = document.getElementById("new-btn");
 const importantBtn = document.querySelector(".important");
@@ -11,8 +17,31 @@ const closeModalBtn = document.getElementById("close-modal");
 const saveBtn = document.getElementById("save-btn");
 const projectTitle = document.querySelector("h1");
 const taskHeader = document.querySelector(".task-header");
-
 const completedBtn = document.querySelector(".completed");
+const todayBtn = document.querySelector(".today");
+const tomorrowBtn = document.querySelector(".tomorrow");
+const upcomingBtn = document.querySelector(".upcoming");
+let theDate = new Date();
+let today = `${theDate.getMonth()}/${theDate.getDate()}/${theDate.getFullYear()}`;
+let tomorrow = `${theDate.getMonth()}/${
+  theDate.getDate() + 1
+}/${theDate.getFullYear()}`;
+
+todayBtn.addEventListener("click", () => {
+  dateList.forEach((date) => {
+    if (today === date) {
+      console.log("today");
+    }
+  });
+});
+
+tomorrowBtn.addEventListener("click", () => {
+  dateList.forEach((date) => {
+    if (tomorrow === date) {
+      console.log("tomorrow");
+    }
+  });
+});
 
 addNewBtn.addEventListener("click", () => {
   modal.showModal();
