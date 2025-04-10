@@ -28,17 +28,19 @@ let tomorrow = `${theDate.getMonth()}/${
 }/${theDate.getFullYear()}`;
 
 todayBtn.addEventListener("click", () => {
+  resetView();
   dateList.forEach((date) => {
-    if (today === date) {
-      console.log("today");
+    if (today !== date) {
+      createdTasks[dateList.indexOf(date)].classList.add("not-priority");
     }
   });
 });
 
 tomorrowBtn.addEventListener("click", () => {
+  resetView();
   dateList.forEach((date) => {
-    if (tomorrow === date) {
-      console.log("tomorrow");
+    if (tomorrow !== date) {
+      createdTasks[dateList.indexOf(date)].classList.add("not-priority");
     }
   });
 });
@@ -54,16 +56,15 @@ closeModalBtn.addEventListener("click", () => {
 projectDisplay.addEventListener("click", btnClicks);
 saveBtn.addEventListener("click", save);
 completedBtn.addEventListener("click", () => {
+  resetView();
   completedTasks.forEach((task) => task.classList.remove("task-completed"));
   createdTasks.forEach((task) => task.classList.add("created-task"));
 });
 importantBtn.addEventListener("click", () => {
-  completedTasks.forEach((task) => task.classList.add("task-completed"));
+  resetView();
   createdTasks.forEach((task) => {
     if (!task.classList.contains("priority-task")) {
       task.classList.add("not-priority");
-    } else {
-      task.classList.remove("created-task");
     }
   });
 });
