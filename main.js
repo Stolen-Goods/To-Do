@@ -22,25 +22,35 @@ const todayBtn = document.querySelector(".today");
 const tomorrowBtn = document.querySelector(".tomorrow");
 const upcomingBtn = document.querySelector(".upcoming");
 let theDate = new Date();
-let today = `${theDate.getMonth()}/${theDate.getDate()}/${theDate.getFullYear()}`;
-let tomorrow = `${theDate.getMonth()}/${
-  theDate.getDate() + 1
-}/${theDate.getFullYear()}`;
+let theMonth = theDate.getMonth();
+let theDay = theDate.getDate();
+let theYear = theDate.getFullYear();
+let today = `${theMonth}/${theDay}/${theYear}`;
+let tomorrow = `${theMonth}/${theDay + 1}/${theYear}`;
 
 todayBtn.addEventListener("click", () => {
   resetView();
-  dateList.forEach((date) => {
-    if (today !== date) {
-      createdTasks[dateList.indexOf(date)].classList.add("not-priority");
+  dateList.forEach((date, i) => {
+    if (date !== today) {
+      createdTasks[i].classList.add("not-priority");
     }
   });
 });
 
 tomorrowBtn.addEventListener("click", () => {
   resetView();
-  dateList.forEach((date) => {
-    if (tomorrow !== date) {
-      createdTasks[dateList.indexOf(date)].classList.add("not-priority");
+  dateList.forEach((date, i) => {
+    if (date !== tomorrow) {
+      createdTasks[i].classList.add("not-priority");
+    }
+  });
+});
+
+upcomingBtn.addEventListener("click", () => {
+  resetView();
+  dateList.forEach((date, i) => {
+    if (date === today || date === tomorrow) {
+      createdTasks[i].classList.add("not-priority");
     }
   });
 });
