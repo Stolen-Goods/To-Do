@@ -6,6 +6,7 @@ export const form = document.querySelector("form");
 
 export let createdTasks = [];
 export let dateList = [];
+export let formattedDate = [];
 
 export function resetView() {
   createdTasks.forEach((task) => task.classList.remove("created-task"));
@@ -30,11 +31,13 @@ export default function save(e) {
   newDiv.classList.add("task-box");
   projectDisplay.append(newDiv);
   newDiv.innerHTML = `
-    <p>${title}</p>
+    <p class="task-title">${title}</p>
     <hr>
-    <p>${descrip}</p>
-    <p>${date.getMonth() + 1}/${date.getDate() + 1}/${date.getFullYear()}</p>
-    <p>${priority}</p>
+    <p class="task-descrip">${descrip}</p>
+    <p class="task-date">${date.getMonth() + 1}/${
+    date.getDate() + 1
+  }/${date.getFullYear()}</p> 
+    <p class="task-priority">${priority}</p>
     <button class="edit" type="button">Edit</button>
     <button class="complete" type="button">Complete</button>
     <button class="delete" type="button">Delete</button>
@@ -46,6 +49,13 @@ export default function save(e) {
   dateList.push(
     `${date.getMonth()}/${date.getDate() + 1}/${date.getFullYear()}`
   );
+  formattedDate.push(
+    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getDate() + 1).padStart(2, "0")}`
+  );
+  console.log(priority);
   modal.close();
   form.reset();
 }

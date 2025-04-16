@@ -1,7 +1,7 @@
 "use strict";
 
 import save from "./save.js";
-import btnClicks, { completedTasks } from "./buttons.js";
+import btnClicks, { completedTasks, modal } from "./buttons.js";
 import {
   projectDisplay,
   createdTasks,
@@ -12,7 +12,7 @@ import {
 
 const addNewBtn = document.getElementById("new-btn");
 const importantBtn = document.querySelector(".important");
-const modal = document.getElementById("modal");
+
 const closeModalBtn = document.getElementById("close-modal");
 const saveBtn = document.getElementById("save-btn");
 const projectTitle = document.querySelector("h1");
