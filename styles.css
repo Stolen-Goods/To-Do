@@ -47,6 +47,10 @@ h3 {
   text-decoration: underline;
 }
 
+.hidden {
+  display: none;
+}
+
 #searchbar {
   border: 3px solid var(--border);
   border-radius: 10px;

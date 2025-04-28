@@ -1,5 +1,6 @@
 import Project from "./projects.js";
 import { completedTasks } from "./buttons.js";
+import { updateBtn, saveBtn } from "./main.js";
 
 export const projectDisplay = document.querySelector(".projects");
 export const form = document.querySelector("form");
@@ -12,6 +13,8 @@ export function resetView() {
   createdTasks.forEach((task) => task.classList.remove("created-task"));
   createdTasks.forEach((task) => task.classList.remove("not-priority"));
   completedTasks.forEach((task) => task.classList.add("task-completed"));
+  updateBtn.classList.add("hidden");
+  saveBtn.classList.remove("hidden");
 }
 
 export default function save(e) {
@@ -46,16 +49,12 @@ export default function save(e) {
     newDiv.classList.add("priority-task");
   }
   createdTasks.push(newDiv);
-  dateList.push(
-    `${date.getMonth()}/${date.getDate() + 1}/${date.getFullYear()}`
-  );
+  dateList.push(`${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`);
   formattedDate.push(
-    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(date.getDate() + 1).padStart(2, "0")}`
+    `${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${String(
+      date.getDate()
+    ).padStart(2, "0")}`
   );
-  console.log(priority);
   modal.close();
   form.reset();
 }

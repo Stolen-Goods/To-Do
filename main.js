@@ -12,9 +12,9 @@ import {
 
 const addNewBtn = document.getElementById("new-btn");
 const importantBtn = document.querySelector(".important");
-
 const closeModalBtn = document.getElementById("close-modal");
-const saveBtn = document.getElementById("save-btn");
+export const saveBtn = document.getElementById("save-btn");
+export const updateBtn = document.getElementById("update-btn");
 const projectTitle = document.querySelector("h1");
 const taskHeader = document.querySelector(".task-header");
 const completedBtn = document.querySelector(".completed");
