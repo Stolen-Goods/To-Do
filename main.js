@@ -22,12 +22,11 @@ const todayBtn = document.querySelector(".today");
 const tomorrowBtn = document.querySelector(".tomorrow");
 const upcomingBtn = document.querySelector(".upcoming");
 let theDate = new Date();
-let theMonth = theDate.getMonth();
-let theDay = theDate.getDate();
-let theYear = theDate.getFullYear();
+let theMonth = theDate.getUTCMonth();
+let theDay = theDate.getUTCDate();
+let theYear = theDate.getUTCFullYear();
 let today = `${theMonth}/${theDay}/${theYear}`;
 let tomorrow = `${theMonth}/${theDay + 1}/${theYear}`;
-
 todayBtn.addEventListener("click", () => {
   resetView();
   dateList.forEach((date, i) => {

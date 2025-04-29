@@ -68,9 +68,9 @@ function update(e, editedTask) {
     <p class="task-title">${title}</p>
     <hr>
     <p class="task-descrip">${descrip}</p>
-    <p class="task-date">${date.getMonth() + 1}/${
-    date.getDate() + 1
-  }/${date.getFullYear()}</p>
+    <p class="task-date">${
+      date.getUTCMonth() + 1
+    }/${date.getUTCDate()}/${date.getUTCFullYear()}</p>
     <p class="task-priority">${priority}</p>
     <button class="edit" type="button">Edit</button>
     <button class="complete" type="button">Complete</button>
@@ -83,15 +83,15 @@ function update(e, editedTask) {
   dateList.splice(
     createdTasks.indexOf(editedTask),
     1,
-    `${date.getMonth()}/${date.getDate() + 1}/${date.getFullYear()}`
+    `${date.getUTCMonth()}/${date.getUTCDate()}/${date.getUTCFullYear()}`
   );
   formattedDate.splice(
     createdTasks.indexOf(editedTask),
     1,
-    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+    `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
       2,
       "0"
-    )}-${String(date.getDate() + 1).padStart(2, "0")}`
+    )}-${String(date.getUTCDate()).padStart(2, "0")}`
   );
   editedTask.replaceWith(newDiv);
   modal.close();

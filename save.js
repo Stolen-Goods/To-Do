@@ -37,9 +37,9 @@ export default function save(e) {
     <p class="task-title">${title}</p>
     <hr>
     <p class="task-descrip">${descrip}</p>
-    <p class="task-date">${date.getMonth() + 1}/${
-    date.getDate() + 1
-  }/${date.getFullYear()}</p> 
+    <p class="task-date">${
+      date.getUTCMonth() + 1
+    }/${date.getUTCDate()}/${date.getUTCFullYear()}</p> 
     <p class="task-priority">${priority}</p>
     <button class="edit" type="button">Edit</button>
     <button class="complete" type="button">Complete</button>
@@ -49,11 +49,14 @@ export default function save(e) {
     newDiv.classList.add("priority-task");
   }
   createdTasks.push(newDiv);
-  dateList.push(`${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`);
+  dateList.push(
+    `${date.getUTCMonth()}/${date.getUTCDate()}/${date.getUTCFullYear()}`
+  );
   formattedDate.push(
-    `${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${String(
-      date.getDate()
-    ).padStart(2, "0")}`
+    `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getUTCDate()).padStart(2, "0")}`
   );
   modal.close();
   form.reset();
