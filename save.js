@@ -19,6 +19,7 @@ export function resetView() {
 
 export default function save(e) {
   e.preventDefault();
+  form.reportValidity();
   const isPriority = document.querySelector("input[name='priority']:checked");
   const taskTitle = document.getElementById("title");
   const description = document.getElementById("description");
@@ -35,12 +36,10 @@ export default function save(e) {
   projectDisplay.append(newDiv);
   newDiv.innerHTML = `
     <p class="task-title">${title}</p>
-    <hr>
     <p class="task-descrip">${descrip}</p>
-    <p class="task-date">${
+    <p class="task-date">Due Date: ${
       date.getUTCMonth() + 1
     }/${date.getUTCDate()}/${date.getUTCFullYear()}</p> 
-    <p class="task-priority">${priority}</p>
     <button class="edit" type="button">Edit</button>
     <button class="complete" type="button">Complete</button>
     <button class="delete" type="button">Delete</button>

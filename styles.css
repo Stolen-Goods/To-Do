@@ -5,7 +5,6 @@
 }
 
 * {
-  /* overflow: hidden; */
   box-sizing: border-box;
   margin: 0;
 }
@@ -14,8 +13,9 @@
   margin: auto;
   background-color: #e59500;
   color: var(--text);
-  font-size: 2rem;
-  padding: 4rem;
+  font-size: 3rem;
+  padding: 6rem;
+  border-radius: 10px;
 }
 
 form {
@@ -25,8 +25,22 @@ form {
 
 .radio-container {
   display: block;
-  font-size: 1rem;
-  margin: auto;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+fieldset {
+  border: 0;
+  padding-left: 0;
+}
+
+legend {
+  font-size: 3rem;
+}
+
+input,
+textarea {
+  margin-bottom: 20px;
 }
 
 body {
@@ -36,9 +50,9 @@ body {
 
 h1 {
   color: var(--text);
-
   font-size: 5rem;
   text-align: center;
+  margin-bottom: 40px;
 }
 
 h3 {
@@ -51,11 +65,44 @@ h3 {
   display: none;
 }
 
-#searchbar {
-  border: 3px solid var(--border);
+.btn-container {
+  display: flex;
+}
+
+.task-title {
+  font-size: 4rem;
+}
+
+.task-descrip {
+  font-size: 2.5rem;
+}
+
+.task-date {
+  font-size: 1.5rem;
+}
+
+#save-btn,
+#update-btn,
+#close-modal {
+  width: 50%;
+  border-radius: 10px;
+  padding: 0.5rem;
+  background-color: var(--text);
+  color: #e59500;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+}
+
+.edit,
+.complete,
+.delete {
+  background-color: var(--text);
+  color: #e59500;
+  font-size: 0.75rem;
+  padding: 0.5rem;
   border-radius: 10px;
   width: 25%;
-  margin: 2rem 1rem;
+  text-align: center;
 }
 
 #sidebar {
@@ -87,11 +134,18 @@ h3 {
 }
 
 .task-box {
-  color: rgb(34, 29, 29);
-  width: 15%;
-  border: 3px solid var(--border);
+  color: var(--text);
+  width: 20%;
+  border: 10px solid var(--border);
   font-size: 2rem;
   background-color: #e59500;
+  border-radius: 10px;
+  word-wrap: break-word;
+  padding: 2rem;
+}
+
+.task-box p {
+  margin-bottom: 20px;
 }
 
 .projects-container {
@@ -120,4 +174,9 @@ h3 {
 
 .not-priority {
   display: none !important;
+}
+
+.priority-task {
+  border: 10px solid yellow;
+  border-radius: 10px;
 }

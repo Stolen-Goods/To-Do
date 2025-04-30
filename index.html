@@ -18,14 +18,16 @@
         <input required type="date" id="due-date" name="due-date" />
         <fieldset class="radio-container">
           <legend>Is this a priority?</legend>
-          <input type="radio" id="yes" name="priority" value="yes" />
+          <input required type="radio" id="yes" name="priority" value="yes" />
           <label for="yes">Yes</label>
-          <input checked type="radio" id="no" name="priority" value="no" />
+          <input required type="radio" id="no" name="priority" value="no" />
           <label for="no">No</label>
         </fieldset>
-        <button id="save-btn" type="button">Save</button>
-        <button id="update-btn" class="hidden" type="button">Update</button>
-        <button id="close-modal" type="button">Cancel</button>
+        <div class="btn-container">
+          <button id="save-btn" type="submit">Save</button>
+          <button id="update-btn" class="hidden" type="submit">Update</button>
+          <button id="close-modal" type="button">Cancel</button>
+        </div>
       </form>
     </dialog>
     <div id="sidebar">
@@ -44,7 +46,6 @@
     </div>
     <div class="projects-container">
       <h1>Projects</h1>
-      <hr />
       <div class="projects"></div>
     </div>
   </body>

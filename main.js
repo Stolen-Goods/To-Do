@@ -27,6 +27,8 @@ let theDay = theDate.getUTCDate();
 let theYear = theDate.getUTCFullYear();
 let today = `${theMonth}/${theDay}/${theYear}`;
 let tomorrow = `${theMonth}/${theDay + 1}/${theYear}`;
+let nextMonth = `${theMonth + 1}/${1}/${theYear}`;
+let nextYear = `${0}/${1}/${theYear + 1}`;
 todayBtn.addEventListener("click", () => {
   resetView();
   dateList.forEach((date, i) => {
@@ -39,7 +41,7 @@ todayBtn.addEventListener("click", () => {
 tomorrowBtn.addEventListener("click", () => {
   resetView();
   dateList.forEach((date, i) => {
-    if (date !== tomorrow) {
+    if (date !== tomorrow && date !== nextMonth && date !== nextYear) {
       createdTasks[i].classList.add("not-priority");
     }
   });
@@ -48,7 +50,12 @@ tomorrowBtn.addEventListener("click", () => {
 upcomingBtn.addEventListener("click", () => {
   resetView();
   dateList.forEach((date, i) => {
-    if (date === today || date === tomorrow) {
+    if (
+      date === today ||
+      date === tomorrow ||
+      date === nextMonth ||
+      date === nextYear
+    ) {
       createdTasks[i].classList.add("not-priority");
     }
   });

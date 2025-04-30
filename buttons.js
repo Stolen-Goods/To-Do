@@ -39,18 +39,22 @@ export default function btnClicks(e) {
     saveBtn.classList.add("hidden");
     const taskTitle = editedTask.querySelector(".task-title").textContent;
     const taskDescrip = editedTask.querySelector(".task-descrip").textContent;
-    // const taskPriority = editedTask.querySelector(".task-priority").value;
+    if (editedTask.classList.contains("priority-task")) {
+      document.getElementById("yes").checked = true;
+    } else {
+      document.getElementById("no").checked = true;
+    }
     document.getElementById("title").value = taskTitle;
     document.getElementById("description").value = taskDescrip;
     document.getElementById("due-date").value =
       formattedDate[createdTasks.indexOf(editedTask)];
-    // console.log(taskPriority);
     modal.showModal();
   }
 }
 
 function update(e, editedTask) {
   e.preventDefault();
+  if (!form.reportValidity()) return;
   const isPriority = document.querySelector("input[name='priority']:checked");
   const taskTitle = document.getElementById("title");
   const description = document.getElementById("description");
@@ -66,12 +70,10 @@ function update(e, editedTask) {
   newDiv.classList.add("task-box");
   newDiv.innerHTML = `
     <p class="task-title">${title}</p>
-    <hr>
     <p class="task-descrip">${descrip}</p>
-    <p class="task-date">${
+    <p class="task-date">Due Date: ${
       date.getUTCMonth() + 1
     }/${date.getUTCDate()}/${date.getUTCFullYear()}</p>
-    <p class="task-priority">${priority}</p>
     <button class="edit" type="button">Edit</button>
     <button class="complete" type="button">Complete</button>
     <button class="delete" type="button">Delete</button>
