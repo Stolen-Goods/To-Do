@@ -1,6 +1,6 @@
 "use strict";
 
-import save from "./save.js";
+import save, { formattedDate, renderPage } from "./save.js";
 import btnClicks, { completedTasks, modal } from "./buttons.js";
 import {
   projectDisplay,
@@ -8,7 +8,15 @@ import {
   form,
   resetView,
   dateList,
+  savedTasks,
 } from "./save.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (savedTasks.length !== 0) {
+    renderPage();
+  }
+  console.log(dateList);
+});
 
 const addNewBtn = document.getElementById("new-btn");
 const importantBtn = document.querySelector(".important");

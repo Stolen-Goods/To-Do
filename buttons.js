@@ -4,6 +4,7 @@ import {
   dateList,
   formattedDate,
   form,
+  savedTasks,
 } from "./save.js";
 import Project from "./projects.js";
 import { updateBtn, saveBtn } from "./main.js";
@@ -11,13 +12,25 @@ import { updateBtn, saveBtn } from "./main.js";
 export let completedTasks = [];
 export const modal = document.getElementById("modal");
 
+function convertToFormattedDate(dateStr) {
+  const [month, day, year] = dateStr.split("/");
+  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+}
+
 export default function btnClicks(e) {
   if (e.target.classList.contains("delete")) {
     const deletedTask = e.target.closest(".task-box");
+    const taskId = deletedTask.dataset.id;
+    const taskIndex = savedTasks.findIndex((task) => task.id == taskId);
+    if (taskIndex !== -1) {
+      savedTasks.splice(taskIndex, 1);
+      localStorage.setItem("tasks", JSON.stringify(savedTasks));
+    }
     completedTasks.push(deletedTask);
     dateList.splice(createdTasks.indexOf(deletedTask), 1);
     formattedDate.splice(createdTasks.indexOf(deletedTask), 1);
     createdTasks.splice(createdTasks.indexOf(deletedTask), 1);
+
     projectDisplay.removeChild(deletedTask);
   }
   if (e.target.classList.contains("complete")) {
@@ -60,41 +73,77 @@ function update(e, editedTask) {
   const description = document.getElementById("description");
   const dueDate = document.getElementById("due-date");
 
-  const { title, descrip, date, priority } = new Project(
-    taskTitle.value,
-    description.value,
-    new Date(dueDate.value),
-    isPriority.value
+  const originalId = editedTask.dataset.id;
+
+  // const { title, descrip, date, priority } = new Project(
+  //   taskTitle.value,
+  //   description.value,
+  //   new Date(dueDate.value),
+  //   isPriority.value
+  // );
+
+  const updatedTaskData = {
+    id: Number(originalId),
+    title: taskTitle.value,
+    descrip: description.value,
+    date: `${new Date(dueDate.value).getUTCMonth() + 1}/${new Date(
+      dueDate.value
+    ).getUTCDate()}/${new Date(dueDate.value).getUTCFullYear()}`,
+    priority: isPriority.value,
+  };
+
+  const taskIndex = savedTasks.findIndex(
+    (task) => task.id == updatedTaskData.id
   );
+  if (taskIndex !== -1) {
+    savedTasks[taskIndex] = updatedTaskData;
+    localStorage.setItem("tasks", JSON.stringify(savedTasks));
+  }
+
   const newDiv = document.createElement("div");
   newDiv.classList.add("task-box");
+  newDiv.setAttribute("data-id", updatedTaskData.id);
   newDiv.innerHTML = `
-    <p class="task-title">${title}</p>
-    <p class="task-descrip">${descrip}</p>
-    <p class="task-date">Due Date: ${
-      date.getUTCMonth() + 1
-    }/${date.getUTCDate()}/${date.getUTCFullYear()}</p>
+    <p class="task-title">${updatedTaskData.title}</p>
+    <p class="task-descrip">${updatedTaskData.descrip}</p>
+    <p class="task-date">Due Date: ${updatedTaskData.date}</p>
     <button class="edit" type="button">Edit</button>
     <button class="complete" type="button">Complete</button>
     <button class="delete" type="button">Delete</button>
     `;
-  if (priority === "yes") {
+
+  if (updatedTaskData.priority === "yes") {
     newDiv.classList.add("priority-task");
   }
+
   createdTasks.splice(createdTasks.indexOf(editedTask), 1, newDiv);
-  dateList.splice(
-    createdTasks.indexOf(editedTask),
-    1,
-    `${date.getUTCMonth()}/${date.getUTCDate()}/${date.getUTCFullYear()}`
-  );
-  formattedDate.splice(
-    createdTasks.indexOf(editedTask),
-    1,
-    `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(date.getUTCDate()).padStart(2, "0")}`
-  );
+
+  //fix pushing to the date arrays
+
+  const index = createdTasks.indexOf(editedTask);
+  if (index !== -1) {
+    createdTasks.splice(index, 1, newDiv);
+    dateList.splice(index, 1, updatedTaskData.date);
+    formattedDate.splice(
+      index,
+      1,
+      convertToFormattedDate(updatedTaskData.date)
+    );
+  }
+
+  // dateList.splice(
+  //   createdTasks.indexOf(editedTask),
+  //   1,
+  //   `${date.getUTCMonth()}/${date.getUTCDate()}/${date.getUTCFullYear()}`
+  // );
+  // formattedDate.splice(
+  //   index,
+  //   1,
+  //   `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
+  //     2,
+  //     "0"
+  //   )}-${String(date.getUTCDate()).padStart(2, "0")}`
+  // );
   editedTask.replaceWith(newDiv);
   modal.close();
   form.reset();

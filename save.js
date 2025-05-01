@@ -6,6 +6,7 @@ export const projectDisplay = document.querySelector(".projects");
 export const form = document.querySelector("form");
 
 export let createdTasks = [];
+export let savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 export let dateList = [];
 export let formattedDate = [];
 
@@ -15,6 +16,37 @@ export function resetView() {
   completedTasks.forEach((task) => task.classList.add("task-completed"));
   updateBtn.classList.add("hidden");
   saveBtn.classList.remove("hidden");
+}
+
+export function renderPage() {
+  savedTasks.forEach((task) => {
+    const taskDiv = document.createElement("div");
+    taskDiv.classList.add("task-box");
+    taskDiv.setAttribute("data-id", task.id);
+    taskDiv.innerHTML = `
+    <p class="task-title">${task.title}</p>
+    <p class="task-descrip">${task.descrip}</p>
+    <p class="task-date">Due Date: ${task.date}</p>
+    <button class="edit" type="button">Edit</button>
+    <button class="complete" type="button">Complete</button>
+    <button class="delete" type="button">Delete</button>
+  `;
+    if (task.priority === "yes") {
+      taskDiv.classList.add("priority-task");
+    }
+    const date = new Date(task.date);
+    projectDisplay.appendChild(taskDiv);
+    createdTasks.push(taskDiv);
+    dateList.push(
+      `${date.getUTCMonth()}/${date.getUTCDate()}/${date.getUTCFullYear()}`
+    );
+    formattedDate.push(
+      `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
+        2,
+        "0"
+      )}-${String(date.getUTCDate()).padStart(2, "0")}`
+    );
+  });
 }
 
 export default function save(e) {
@@ -31,15 +63,27 @@ export default function save(e) {
     new Date(dueDate.value),
     isPriority.value
   );
+
+  const taskData = {
+    id: Date.now(),
+    title,
+    descrip,
+    date: `${
+      date.getUTCMonth() + 1
+    }/${date.getUTCDate()}/${date.getUTCFullYear()}`,
+    priority,
+  };
+
+  savedTasks.push(taskData);
+  localStorage.setItem("tasks", JSON.stringify(savedTasks));
   const newDiv = document.createElement("div");
   newDiv.classList.add("task-box");
+  newDiv.setAttribute("data-id", taskData.id);
   projectDisplay.append(newDiv);
   newDiv.innerHTML = `
     <p class="task-title">${title}</p>
     <p class="task-descrip">${descrip}</p>
-    <p class="task-date">Due Date: ${
-      date.getUTCMonth() + 1
-    }/${date.getUTCDate()}/${date.getUTCFullYear()}</p> 
+    <p class="task-date">Due Date: ${taskData.date} </p> 
     <button class="edit" type="button">Edit</button>
     <button class="complete" type="button">Complete</button>
     <button class="delete" type="button">Delete</button>
