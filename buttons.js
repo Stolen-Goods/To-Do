@@ -16,6 +16,10 @@ function convertToFormattedDate(dateStr) {
   const [month, day, year] = dateStr.split("/");
   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
 }
+function newDateList(dateStr) {
+  const [month, day, year] = dateStr.split("/");
+  return `${month - 1}/${day}/${year}`;
+}
 
 export default function btnClicks(e) {
   if (e.target.classList.contains("delete")) {
@@ -33,7 +37,9 @@ export default function btnClicks(e) {
 
     projectDisplay.removeChild(deletedTask);
   }
+
   if (e.target.classList.contains("complete")) {
+    //fix for localStorage
     const completedTask = e.target.closest(".task-box");
     completedTasks.push(completedTask);
     completedTask.classList.add("task-completed");
@@ -45,6 +51,7 @@ export default function btnClicks(e) {
     completedTask.lastElementChild.remove();
     completedTask.lastElementChild.remove();
   }
+
   if (e.target.classList.contains("edit")) {
     const editedTask = e.target.closest(".task-box");
     updateBtn.classList.remove("hidden");
@@ -74,13 +81,6 @@ function update(e, editedTask) {
   const dueDate = document.getElementById("due-date");
 
   const originalId = editedTask.dataset.id;
-
-  // const { title, descrip, date, priority } = new Project(
-  //   taskTitle.value,
-  //   description.value,
-  //   new Date(dueDate.value),
-  //   isPriority.value
-  // );
 
   const updatedTaskData = {
     id: Number(originalId),
@@ -116,34 +116,17 @@ function update(e, editedTask) {
     newDiv.classList.add("priority-task");
   }
 
-  createdTasks.splice(createdTasks.indexOf(editedTask), 1, newDiv);
-
-  //fix pushing to the date arrays
-
   const index = createdTasks.indexOf(editedTask);
   if (index !== -1) {
-    createdTasks.splice(index, 1, newDiv);
-    dateList.splice(index, 1, updatedTaskData.date);
+    dateList.splice(index, 1, newDateList(updatedTaskData.date));
     formattedDate.splice(
       index,
       1,
       convertToFormattedDate(updatedTaskData.date)
     );
+    createdTasks.splice(index, 1, newDiv);
   }
 
-  // dateList.splice(
-  //   createdTasks.indexOf(editedTask),
-  //   1,
-  //   `${date.getUTCMonth()}/${date.getUTCDate()}/${date.getUTCFullYear()}`
-  // );
-  // formattedDate.splice(
-  //   index,
-  //   1,
-  //   `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
-  //     2,
-  //     "0"
-  //   )}-${String(date.getUTCDate()).padStart(2, "0")}`
-  // );
   editedTask.replaceWith(newDiv);
   modal.close();
   form.reset();

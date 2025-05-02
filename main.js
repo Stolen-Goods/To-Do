@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (savedTasks.length !== 0) {
     renderPage();
   }
-  console.log(dateList);
 });
 
 const addNewBtn = document.getElementById("new-btn");
