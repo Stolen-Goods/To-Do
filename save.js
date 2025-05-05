@@ -20,6 +20,7 @@ export function resetView() {
 
 export function renderPage() {
   savedTasks.forEach((task) => {
+    const todayDate = new Date();
     const taskDiv = document.createElement("div");
     taskDiv.classList.add("task-box");
     taskDiv.setAttribute("data-id", task.id);
@@ -56,6 +57,18 @@ export function renderPage() {
           "0"
         )}-${String(date.getUTCDate()).padStart(2, "0")}`
       );
+
+      if (date.getTime() < todayDate.getTime()) {
+        taskDiv.classList.add("overdue");
+        taskDiv.innerHTML = `
+    <p>Overdue!</p>
+    <p class="task-title">${task.title}</p>
+    <p class="task-descrip">${task.descrip}</p>
+    <p class="task-date">Due Date: ${task.date}</p>
+    <button class="edit" type="button">Edit</button>
+    <button class="complete" type="button">Complete</button>
+    <button class="delete" type="button">Delete</button>`;
+      }
     }
   });
 }
