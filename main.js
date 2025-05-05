@@ -80,6 +80,7 @@ projectDisplay.addEventListener("click", btnClicks);
 saveBtn.addEventListener("click", save);
 completedBtn.addEventListener("click", () => {
   resetView();
+
   completedTasks.forEach((task) => task.classList.remove("task-completed"));
   createdTasks.forEach((task) => task.classList.add("created-task"));
 });

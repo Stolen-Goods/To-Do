@@ -6,7 +6,6 @@ import {
   form,
   savedTasks,
 } from "./save.js";
-import Project from "./projects.js";
 import { updateBtn, saveBtn } from "./main.js";
 
 export let completedTasks = [];
@@ -39,17 +38,23 @@ export default function btnClicks(e) {
   }
 
   if (e.target.classList.contains("complete")) {
-    //fix for localStorage
     const completedTask = e.target.closest(".task-box");
+    const index = createdTasks.indexOf(completedTask);
+    const taskId = Number(completedTask.dataset.id);
     completedTasks.push(completedTask);
     completedTask.classList.add("task-completed");
-    dateList.splice(createdTasks.indexOf(completedTask), 1);
-    formattedDate.splice(createdTasks.indexOf(completedTask), 1);
-    createdTasks.splice(createdTasks.indexOf(completedTask), 1);
-
+    dateList.splice(index, 1);
+    formattedDate.splice(index, 1);
+    createdTasks.splice(index, 1);
+    savedTasks.forEach((task) => {
+      if (task.id === taskId) {
+        task.isCompleted = true;
+      }
+    });
     completedTask.lastElementChild.remove();
     completedTask.lastElementChild.remove();
     completedTask.lastElementChild.remove();
+    localStorage.setItem("tasks", JSON.stringify(savedTasks));
   }
 
   if (e.target.classList.contains("edit")) {

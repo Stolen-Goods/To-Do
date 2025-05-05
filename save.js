@@ -34,18 +34,29 @@ export function renderPage() {
     if (task.priority === "yes") {
       taskDiv.classList.add("priority-task");
     }
-    const date = new Date(task.date);
-    projectDisplay.appendChild(taskDiv);
-    createdTasks.push(taskDiv);
-    dateList.push(
-      `${date.getUTCMonth()}/${date.getUTCDate()}/${date.getUTCFullYear()}`
-    );
-    formattedDate.push(
-      `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
-        2,
-        "0"
-      )}-${String(date.getUTCDate()).padStart(2, "0")}`
-    );
+    if (task.isCompleted) {
+      taskDiv.classList.add("task-completed");
+      taskDiv.lastElementChild.remove();
+      taskDiv.lastElementChild.remove();
+      taskDiv.lastElementChild.remove();
+      projectDisplay.appendChild(taskDiv);
+      completedTasks.push(taskDiv);
+    }
+
+    if (!task.isCompleted) {
+      const date = new Date(task.date);
+      projectDisplay.appendChild(taskDiv);
+      createdTasks.push(taskDiv);
+      dateList.push(
+        `${date.getUTCMonth()}/${date.getUTCDate()}/${date.getUTCFullYear()}`
+      );
+      formattedDate.push(
+        `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
+          2,
+          "0"
+        )}-${String(date.getUTCDate()).padStart(2, "0")}`
+      );
+    }
   });
 }
 
@@ -91,6 +102,7 @@ export default function save(e) {
   if (priority === "yes") {
     newDiv.classList.add("priority-task");
   }
+
   createdTasks.push(newDiv);
   dateList.push(
     `${date.getUTCMonth()}/${date.getUTCDate()}/${date.getUTCFullYear()}`
