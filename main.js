@@ -36,6 +36,7 @@ let today = `${theMonth}/${theDay}/${theYear}`;
 let tomorrow = `${theMonth}/${theDay + 1}/${theYear}`;
 let nextMonth = `${theMonth + 1}/${1}/${theYear}`;
 let nextYear = `${0}/${1}/${theYear + 1}`;
+
 todayBtn.addEventListener("click", () => {
   resetView();
   dateList.forEach((date, i) => {
@@ -58,7 +59,7 @@ upcomingBtn.addEventListener("click", () => {
   resetView();
   dateList.forEach((date, i) => {
     if (
-      date === today ||
+      date <= today ||
       date === tomorrow ||
       date === nextMonth ||
       date === nextYear
