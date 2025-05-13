@@ -1,6 +1,6 @@
 "use strict";
 
-import save, { formattedDate, renderPage } from "./save.js";
+import save, { renderPage } from "./save.js";
 import btnClicks, { completedTasks, modal } from "./buttons.js";
 import {
   projectDisplay,

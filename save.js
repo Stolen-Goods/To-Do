@@ -21,6 +21,7 @@ export function resetView() {
 export function renderPage() {
   savedTasks.forEach((task) => {
     const todayDate = new Date();
+    todayDate.setHours(0, 0, 0, 0);
     const taskDiv = document.createElement("div");
     taskDiv.classList.add("task-box");
     taskDiv.setAttribute("data-id", task.id);
